@@ -10,27 +10,36 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         HStack{
-            CardView(isFalg: true)
+            CardView(isFlag: true)
             CardView()
-            CardView(isFalg: true)
+            CardView(isFlag: true)
         }
-        .foregroundColor(.green)
+        .foregroundColor(.orange)
         .padding()
     }
 }
 
 struct CardView: View{
-    var isFalg:Bool = false
+    @State var isFlag = false
+    
     var body: some View {
-        if isFalg{
-            ZStack(content: {
+        ZStack{
+            let base = Circle()
+            if isFlag{
+                base.foregroundColor(.gray)
+                Text("🙄🫥").font(.largeTitle)
+            } else {
                 RoundedRectangle(cornerRadius: 12)
-                    .foregroundColor(.blue)
-                Text("🙄").font(.largeTitle)
-            })
-        } else {
-            RoundedRectangle(cornerRadius: 12)
+            }
         }
+        .onTapGesture{
+            print("tapped2")
+            isFlag = !isFlag
+        }
+        Button("Toggle Flag") {
+            isFlag.toggle()  // 修改状态
+        }
+        
         
     }
 }
