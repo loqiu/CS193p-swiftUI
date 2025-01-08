@@ -8,13 +8,19 @@
 import SwiftUI
 
 struct EmojiMemoryGameView: View {
+    typealias Card = MemoryGame<String>.Card
+    
     @ObservedObject var viewModel: EmojiMemoryGame
-
+    
+    private let aspectRatio: CGFloat = 2/3
+    private let spacing: CGFloat = 4
+    
     var body: some View {
         VStack{
             ScrollView{
                 cards
-                    .animation(.bouncy, value: viewModel.cards)
+                    .foregroundColor(viewModel.color)
+                    .animation(.easeInOut, value: viewModel.cards)
             }
             Button(action: {
                 viewModel.shuffle()
@@ -24,42 +30,17 @@ struct EmojiMemoryGameView: View {
         }
     }
     
-    var cards: some View {
-        LazyVGrid(columns: [GridItem(.adaptive(minimum: 85), spacing: 0)],spacing: 0){
-            ForEach(viewModel.cards.indices, id: \.self){
-                index in
-                CardView(viewModel.cards[index])
-                    .aspectRatio(2/3, contentMode: .fit)
-                    .padding(4)
-            }
+    private var cards: some View {
+        AspectVGrid(items: viewModel.cards, aspectRatio: aspectRatio){ card in
+            CardView(card)
+                .padding(spacing)
+                .onTapGesture {
+                    viewModel.choose(card)
+                }
         }
-        .foregroundColor(.green)
     }
 }
 
-struct CardView: View{
-    var card: MemoryGame<String>.Card
-    
-    init(_ card: MemoryGame<String>.Card) {
-        self.card = card
-    }
-    
-    var body: some View {
-        ZStack{
-            let base = RoundedRectangle(cornerRadius: 12)
-            Group {
-                base.fill(.white)
-                base.strokeBorder(lineWidth: 3)
-                Text(card.content)
-                    .font(.system(size: 200))
-                    .minimumScaleFactor(0.01)
-                    .aspectRatio(1, contentMode: .fit)
-            }
-            .opacity(card.isFaceUp ? 1 : 0)
-            base.fill().opacity(card.isFaceUp ? 0 : 1)
-        }
-    }
-}
 
 #Preview {
     EmojiMemoryGameView(viewModel: EmojiMemoryGame())
