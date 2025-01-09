@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		65228F0E2D3071D7009060B1 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 65228F0D2D3071D7009060B1 /* SwiftUICharts */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		65228ECE2D29BE21009060B1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65228F0E2D3071D7009060B1 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = CS193p;
 			packageProductDependencies = (
+				65228F0D2D3071D7009060B1 /* SwiftUICharts */,
 			);
 			productName = CS193p;
 			productReference = 65228EBC2D29BE1F009060B1 /* CS193p.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 65228EB32D29BE1F009060B1;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				65228F0C2D3071A8009060B1 /* XCRemoteSwiftPackageReference "ChartView" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 65228EBD2D29BE1F009060B1 /* Products */;
 			projectDirPath = "";
@@ -591,6 +600,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		65228F0C2D3071A8009060B1 /* XCRemoteSwiftPackageReference "ChartView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AppPear/ChartView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.5;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		65228F0D2D3071D7009060B1 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65228F0C2D3071A8009060B1 /* XCRemoteSwiftPackageReference "ChartView" */;
+			productName = SwiftUICharts;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 65228EB42D29BE1F009060B1 /* Project object */;
 }
