@@ -10,7 +10,7 @@ class EmojiMemoryGame: ObservableObject{
     private static let emojis = ["🥲","🥸","🤩","🥶","🙂","🥲","🥸","🤩","🥶","🙂","🥲","🥸","🤩","🥶","🙂","🥲","🥸","🤩","🥶","🙂","🥲","🥸","🤩","🥶","🙂","🥲","🥸","🤩","🥶","🙂","🥲","🥸","🤩","🥶","🙂","🥲","🥸","🤩","🥶","🙂"]
     //闭包，MemoryGame有一个参数是func
     private static func createMemoryGame() -> MemoryGame<String> {
-        return MemoryGame(numberOfPairsOfCards: 18){ //pairIndex in
+        return MemoryGame(numberOfPairsOfCards: 8){ //pairIndex in
             if emojis.indices.contains($0){
                 return EmojiMemoryGame.emojis[$0]
             } else {
@@ -27,6 +27,10 @@ class EmojiMemoryGame: ObservableObject{
     
     var color: Color{
         .orange
+    }
+    
+    var score: Int {
+        model.score
     }
     
     // MARK: - Intents

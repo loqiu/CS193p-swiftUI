@@ -1,7 +1,7 @@
 //
 //  CardView.swift
 //  CS193p
-//
+//  View
 //  Created by 王崇锦 on 08/01/2025.
 //
 
@@ -17,26 +17,39 @@ struct CardView: View{
     }
     
     var body: some View {
-        ZStack{
-            let base = RoundedRectangle(cornerRadius: Constants.cornerRadius)
-            Group {
-                base.fill(.white)
-                base.strokeBorder(lineWidth: 3)
-                Text(card.content)
-                    .font(.system(size: 200))
-                    .minimumScaleFactor(0.01)
-                    .multilineTextAlignment(.center)
-                    .aspectRatio(1, contentMode: .fit)
+        TimelineView(.animation) {
+            timeline in
+            if card.isFaceUp || !card.isMatched {
+                Pie(endAngle: .degrees(card.bonusPercentRemaining * 360))
+                    .opacity(0.4)
+                    .overlay(cardContents.padding(5))
                     .padding(5)
+                    .cardify(isFaceUp: card.isFaceUp)
+                    .transition(.opacity)
+            } else {
+                Color.clear
             }
-            .opacity(card.isFaceUp ? 1 : 0)
-            base.fill().opacity(card.isFaceUp ? 0 : 1)
         }
-        .opacity(card.isFaceUp || !card.isMatched ? 1 : 0)
+    }
+    
+    var cardContents: some View {
+        Text(card.content)
+            .font(.system(size: 200))
+            .minimumScaleFactor(0.01)
+            .multilineTextAlignment(.center)
+            .aspectRatio(1, contentMode: .fit)
+            .rotationEffect(.degrees(card.isMatched ? 360 : 0))
+            .animation(.spin(duration: 1), value: card.isMatched)
     }
     
     private struct Constants{
         static let cornerRadius:CGFloat = 12
+    }
+}
+
+extension Animation{
+    static func spin(duration: TimeInterval) -> Animation{
+        .linear(duration: 1).repeatForever(autoreverses: false)
     }
 }
 

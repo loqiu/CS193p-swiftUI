@@ -1,7 +1,7 @@
 //
 //  AspectVGrid.swift
 //  CS193p
-//
+//  View
 //  Created by 王崇锦 on 08/01/2025.
 //
 
@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AspectVGrid<Item: Identifiable, ItemView: View>: View{
     var items: [Item]
-    var aspectRatio: CGFloat = 1
+    var aspectRatio: CGFloat = 2/3
     var content: (Item) -> ItemView
     
     init(items: [Item], aspectRatio: CGFloat, @ViewBuilder content: @escaping (Item) -> ItemView) {
@@ -35,7 +35,7 @@ struct AspectVGrid<Item: Identifiable, ItemView: View>: View{
             }
         }
         // MARKED - set height
-        .frame(height: 600)
+//        .frame(height: 700)
     }
     
     
